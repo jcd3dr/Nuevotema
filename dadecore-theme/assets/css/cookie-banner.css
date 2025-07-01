@@ -1,0 +1,244 @@
+/* Cookie Consent Banner Styles */
+#dadecore-cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--wp--preset--color--gris-oscuro, #333);
+    color: var(--wp--preset--color--light, #fff);
+    padding: var(--wp--preset--spacing--medium, 1rem);
+    z-index: 10000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    font-size: var(--wp--preset--font-size--small, 0.875rem);
+    display: none; /* Hidden by default, shown by JS */
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--small, 0.75rem);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    #dadecore-cookie-consent-banner .cookie-banner-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-text {
+    flex-grow: 1;
+    line-height: 1.6;
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-text p {
+    margin: 0 0 var(--wp--preset--spacing--x-small, 0.5rem);
+    color: var(--wp--preset--color--light, #fff); /* Ensure paragraph text is light */
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-text a {
+    color: var(--wp--preset--color--verde-tech, #00F5A0);
+    text-decoration: underline;
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-actions {
+    display: flex;
+    gap: var(--wp--preset--spacing--small, 0.75rem);
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-actions button {
+    background-color: var(--wp--preset--color--primary, #0057B8);
+    color: var(--wp--preset--color--light, #fff);
+    border: none;
+    padding: var(--wp--preset--spacing--x-small, 0.5rem) var(--wp--preset--spacing--medium, 1rem);
+    border-radius: var(--wp--preset--border--radius--small, 0.25rem);
+    cursor: pointer;
+    font-size: इन्हेरिट;
+    transition: background-color 0.2s ease;
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-actions button:hover {
+    background-color: var(--wp--preset--color--secondary, #FF6F00);
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-actions button.decline {
+    background-color: var(--wp--preset--color--gris-medio, #ccc);
+    color: var(--wp--preset--color--gris-oscuro, #333);
+}
+#dadecore-cookie-consent-banner .cookie-banner-actions button.decline:hover {
+    background-color: var(--wp--preset--color--gris-claro, #f0f0f0);
+}
+
+#dadecore-cookie-consent-banner .cookie-banner-actions button.settings {
+    background-color: transparent;
+    border: 1px solid var(--wp--preset--color--light, #fff);
+}
+#dadecore-cookie-consent-banner .cookie-banner-actions button.settings:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+
+/* Cookie Settings Modal */
+#dadecore-cookie-settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 10001;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    padding: var(--wp--preset--spacing--medium, 1rem);
+    overflow-y: auto;
+}
+
+#dadecore-cookie-settings-modal .modal-content {
+    background-color: var(--wp--preset--color--light, #fff);
+    color: var(--wp--preset--color--gris-oscuro, #333);
+    padding: var(--wp--preset--spacing--large, 1.5rem);
+    border-radius: var(--wp--preset--border--radius--medium, 0.5rem);
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#dadecore-cookie-settings-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--wp--preset--color--gris-claro, #f0f0f0);
+    padding-bottom: var(--wp--preset--spacing--small, 0.75rem);
+    margin-bottom: var(--wp--preset--spacing--medium, 1rem);
+}
+
+#dadecore-cookie-settings-modal .modal-header h3 {
+    margin: 0;
+    font-size: var(--wp--preset--font-size--large, 1.5rem);
+}
+
+#dadecore-cookie-settings-modal .modal-close-button {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+#dadecore-cookie-settings-modal .modal-body .category {
+    margin-bottom: var(--wp--preset--spacing--medium, 1rem);
+    padding-bottom: var(--wp--preset--spacing--small, 0.75rem);
+    border-bottom: 1px solid var(--wp--preset--color--gris-claro, #f0f0f0);
+}
+#dadecore-cookie-settings-modal .modal-body .category:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+#dadecore-cookie-settings-modal .modal-body .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--wp--preset--spacing--x-small, 0.5rem);
+}
+
+#dadecore-cookie-settings-modal .modal-body .category-header label {
+    font-weight: bold;
+    font-size: var(--wp--preset--font-size--medium, 1.125rem);
+}
+
+#dadecore-cookie-settings-modal .modal-body .category-description {
+    font-size: var(--wp--preset--font-size--small, 0.875rem);
+    line-height: 1.5;
+    margin-bottom: var(--wp--preset--spacing--x-small, 0.5rem);
+}
+
+#dadecore-cookie-settings-modal .modal-footer {
+    margin-top: var(--wp--preset--spacing--medium, 1rem);
+    padding-top: var(--wp--preset--spacing--medium, 1rem);
+    border-top: 1px solid var(--wp--preset--color--gris-claro, #f0f0f0);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--wp--preset--spacing--small, 0.75rem);
+}
+
+#dadecore-cookie-settings-modal .modal-footer button {
+    background-color: var(--wp--preset--color--primary, #0057B8);
+    color: var(--wp--preset--color--light, #fff);
+    border: none;
+    padding: var(--wp--preset--spacing--x-small, 0.5rem) var(--wp--preset--spacing--medium, 1rem);
+    border-radius: var(--wp--preset--border--radius--small, 0.25rem);
+    cursor: pointer;
+    font-size: इन्हेरिट;
+}
+#dadecore-cookie-settings-modal .modal-footer button:hover {
+    background-color: var(--wp--preset--color--secondary, #FF6F00);
+}
+
+/* Switch toggle styles */
+.dadecore-cookie-toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px; /* Reduced size */
+    height: 24px; /* Reduced size */
+}
+
+.dadecore-cookie-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dadecore-cookie-toggle .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px; /* Keep it round */
+}
+
+.dadecore-cookie-toggle .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; /* Reduced size */
+    width: 18px;  /* Reduced size */
+    left: 3px;    /* Adjusted position */
+    bottom: 3px;  /* Adjusted position */
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.dadecore-cookie-toggle input:checked + .slider {
+    background-color: var(--wp--preset--color--verde-tech, #2196F3);
+}
+
+.dadecore-cookie-toggle input:focus + .slider {
+    box-shadow: 0 0 1px var(--wp--preset--color--verde-tech, #2196F3);
+}
+
+.dadecore-cookie-toggle input:checked + .slider:before {
+    transform: translateX(20px); /* Adjusted translation */
+}
+
+.dadecore-cookie-toggle.disabled .slider {
+    background-color: #aaa; /* Darker grey for disabled */
+    cursor: not-allowed;
+}
+
+.dadecore-cookie-toggle.disabled .slider:before {
+    background-color: #eee; /* Lighter grey for disabled knob */
+}
+#dadecore-cookie-settings-modal .modal-body .category-header .dadecore-cookie-toggle {
+    flex-shrink: 0; /* Prevent toggle from shrinking */
+}

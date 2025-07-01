@@ -32,4 +32,21 @@ function dadecore_register_elementor_locations( $elementor_theme_manager ) {
 }
 add_action( 'elementor/theme/register_locations', 'dadecore_register_elementor_locations' );
 */
+
+/**
+ * Add GTM noscript to wp_body_open.
+ */
+function dadecore_gtm_noscript() {
+    $gtm_id = get_theme_mod( 'dadecore_gtm_id' );
+    if ( ! empty( $gtm_id ) ) {
+        ?>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo esc_attr( $gtm_id ); ?>"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <?php
+    }
+}
+add_action( 'wp_body_open', 'dadecore_gtm_noscript' );
+
 ?>
