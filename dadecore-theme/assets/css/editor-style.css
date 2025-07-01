@@ -1,0 +1,20 @@
+/*
+ * Editor Styles for Dadecore Theme
+ * This file is referenced by add_editor_style() in inc/setup.php
+ * You can add CSS rules here to make the WYSIWYG editor look more like the front-end.
+ */
+
+body#tinymce.wp-editor {
+    font-family: sans-serif; /* Example: Set a default font */
+    margin: 10px;
+}
+
+body#tinymce.wp-editor h1,
+body#tinymce.wp-editor h2,
+body#tinymce.wp-editor h3,
+body#tinymce.wp-editor h4,
+body#tinymce.wp-editor h5,
+body#tinymce.wp-editor h6 {
+    font-family: serif; /* Example: Set a different font for headings */
+    color: #333;
+}

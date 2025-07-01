@@ -18,10 +18,13 @@ function dadecore_theme_setup() {
 
     // Register navigation menus
     register_nav_menus( array(
-        'menu-1' => __( 'Primary', 'dadecore' ),
+        'primary' => esc_html__( 'Primary Menu', 'dadecore' ),
+        'footer'  => esc_html__( 'Footer Menu', 'dadecore' ),
     ) );
 
     // Switch default core markup for search form, comment form, and comments
+    // Note: 'search-form', 'gallery', 'caption' are required by the task.
+    // 'comment-form' and 'comment-list' are kept from existing code.
     add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 
     // Custom logo support
@@ -32,16 +35,16 @@ function dadecore_theme_setup() {
 
     // Editor styles
     add_theme_support( 'editor-styles' );
-    add_editor_style( 'style.css' );
+    add_editor_style( 'assets/css/editor-style.css' );
 }
 add_action( 'after_setup_theme', 'dadecore_theme_setup' );
 
 // Widgets area
 function dadecore_widgets_init() {
     register_sidebar( array(
-        'name'          => __( 'Sidebar', 'dadecore' ),
-        'id'            => 'sidebar-1',
-        'description'   => __( 'Add widgets here.', 'dadecore' ),
+        'name'          => esc_html__( 'Main Sidebar', 'dadecore' ),
+        'id'            => 'main-sidebar',
+        'description'   => esc_html__( 'Add widgets here to appear in your sidebar.', 'dadecore' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
         'before_title'  => '<h2 class="widget-title">',
