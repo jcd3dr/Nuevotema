@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        { "slug": "primary", "color": "#0057B8" },
+        { "slug": "secondary", "color": "#FF6F00" },
+        { "slug": "light", "color": "#ffffff" },
+        { "slug": "dark", "color": "#000000" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        { "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif", "slug": "system" }
+      ],
+      "fontSizes": [
+        { "slug": "small", "size": "14px" },
+        { "slug": "regular", "size": "16px" },
+        { "slug": "large", "size": "24px" }
+      ]
+    },
+    "layout": {
+      "contentSize": "800px",
+      "wideSize": "1200px"
+    }
+  }
+}
+
