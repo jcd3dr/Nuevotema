@@ -49,6 +49,25 @@ if ( ! defined( 'WORDFENCE_VERSION' ) ) {
     add_filter( 'login_url', 'dadecore_filter_login_url', 10, 3 );
 
     /**
+     * Filter site_url calls for login posts to use the custom slug.
+     *
+     * @param string $url         The complete site URL including scheme and path.
+     * @param string $path        Path relative to the site URL.
+     * @param string $orig_scheme Scheme to give the site URL context.
+     * @return string Filtered URL.
+     */
+    function dadecore_filter_site_login_url( $url, $path, $orig_scheme ) {
+        if ( false !== strpos( $path, 'wp-login.php' ) && 'login_post' === $orig_scheme ) {
+            $options = get_option( 'dadecore_options', array() );
+            $slug    = isset( $options['login_slug'] ) ? sanitize_title( $options['login_slug'] ) : 'login';
+            $url     = home_url( '/' . $slug . '/' );
+        }
+
+        return $url;
+    }
+    add_filter( 'site_url', 'dadecore_filter_site_login_url', 10, 3 );
+
+    /**
      * Limit failed login attempts per IP address.
      */
     function dadecore_limit_login_attempts( $user, $username, $password ) {
