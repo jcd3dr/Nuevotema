@@ -7,18 +7,19 @@
  * `dadecore_skip_native_seo` filter or disable individual pieces of output
  * through both filters and options.
  *
- * Options are read from the `dadecore_seo_options` option. Expected keys:
- * - `disable_title`       Whether to skip the <title> tag.
- * - `disable_description` Whether to skip the meta description tag.
- * - `disable_open_graph`  Whether to skip Open Graph tags.
- * - `disable_json_ld`     Whether to skip JSON-LD structured data.
+ * Options are read from the `dadecore_options` option. Expected keys and
+ * their boolean values are:
+ * - `seo_meta_enabled` Enable `<title>` and description meta tags.
+ * - `seo_open_graph`   Enable Open Graph tags.
+ * - `seo_json_ld`      Enable JSON-LD schema output.
  *
- * Each key defaults to false when the option is missing. Additionally, each
- * output section has a dedicated filter that receives a boolean value:
- * - `dadecore_enable_seo_title`
- * - `dadecore_enable_seo_description`
- * - `dadecore_enable_open_graph`
- * - `dadecore_enable_json_ld`
+ * Each section can be controlled via filters that receive a boolean value:
+ * - `dadecore_enable_meta_tags`   Output `<title>` and description meta tags.
+ * - `dadecore_enable_open_graph`  Output Open Graph tags.
+ * - `dadecore_enable_schema`      Output JSON-LD schema.
+ *
+ * Metadata output is automatically disabled when Yoast SEO or RankMath is
+ * detected unless these filters override the default behavior.
  *
  * @package DadeCore
  */
@@ -26,8 +27,9 @@
 /**
  * Determine if native SEO output should run.
  *
- * The default behavior is to skip output when a well known SEO plugin is
- * active. Developers can force skipping by filtering `dadecore_skip_native_seo`.
+ * The default behavior is to skip output when a well known SEO plugin such as
+ * Yoast SEO or RankMath is active. Developers can force output or suppression
+ * by filtering `dadecore_skip_native_seo`.
  *
  * @return bool True if the theme should handle SEO metadata.
  */
@@ -48,26 +50,26 @@ if ( dadecore_should_output_seo() ) {
 function dadecore_output_seo_metadata() {
     $options = get_option( 'dadecore_options', array() );
 
-    $title_enabled  = ! empty( $options['seo_meta_enabled'] );
-    $desc_enabled   = ! empty( $options['seo_meta_enabled'] );
-    $og_enabled     = ! empty( $options['seo_open_graph'] );
-    $jsonld_enabled = ! empty( $options['seo_json_ld'] );
+    // Determine which sections should output based on options. Each option
+    // stores a boolean value (1 to enable, 0 to disable).
+    $meta_enabled    = ! empty( $options['seo_meta_enabled'] );
+    $og_enabled      = ! empty( $options['seo_open_graph'] );
+    $schema_enabled  = ! empty( $options['seo_json_ld'] );
 
-    $title_enabled  = apply_filters( 'dadecore_enable_seo_title', $title_enabled );
-    $desc_enabled   = apply_filters( 'dadecore_enable_seo_description', $desc_enabled );
+    // Allow developers to toggle each block via filters. Each filter expects
+    // a boolean and should return true to output its associated tags.
+    $meta_enabled   = apply_filters( 'dadecore_enable_meta_tags', $meta_enabled );
     $og_enabled     = apply_filters( 'dadecore_enable_open_graph', $og_enabled );
-    $jsonld_enabled = apply_filters( 'dadecore_enable_json_ld', $jsonld_enabled );
+    $schema_enabled = apply_filters( 'dadecore_enable_schema', $schema_enabled );
 
     global $post;
 
     /* -------------------------- <title> & description ----------------------- */
-    if ( $title_enabled ) {
+    if ( $meta_enabled ) {
         $default_title = isset( $options['seo_default_title'] ) ? $options['seo_default_title'] : '';
         $title = is_front_page() ? ( $default_title ? $default_title : get_bloginfo( 'name' ) ) : wp_get_document_title();
         echo '<title>' . esc_html( $title ) . "</title>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-    }
 
-    if ( $desc_enabled ) {
         $description = '';
         if ( is_singular() ) {
             if ( has_excerpt( $post ) ) {
@@ -116,8 +118,8 @@ function dadecore_output_seo_metadata() {
         }
     }
 
-    /* ----------------------------- JSON-LD data ---------------------------- */
-    if ( $jsonld_enabled ) {
+    /* ----------------------------- JSON-LD schema --------------------------- */
+    if ( $schema_enabled ) {
         // Organization schema.
         $org = array(
             '@context'    => 'https://schema.org',
