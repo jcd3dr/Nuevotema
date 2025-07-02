@@ -32,7 +32,7 @@ function dadecore_theme_setup() {
 
     // Editor styles
     add_theme_support( 'editor-styles' );
-    add_editor_style( 'style.css' );
+    add_editor_style( 'assets/css/style.css' ); // Point to the compiled SCSS output for better WYSIWYG
 }
 add_action( 'after_setup_theme', 'dadecore_theme_setup' );
 
