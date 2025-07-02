@@ -24,8 +24,12 @@ function dadecore_theme_setup() {
     // Switch default core markup for search form, comment form, and comments
     add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 
-    // Custom logo support
+    // Custom logo support so users can upload their brand mark
     add_theme_support( 'custom-logo' );
+
+    // Enable WordPress core header and background customization
+    add_theme_support( 'custom-header' );
+    add_theme_support( 'custom-background' );
 
     // WooCommerce support
     add_theme_support( 'woocommerce' );
