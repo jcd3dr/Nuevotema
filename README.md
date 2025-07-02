@@ -27,3 +27,13 @@ Make sure the generated CSS files are available in the theme before activating i
 - JavaScript enhancements can be added in `assets/js/main.js`.
 
 Feel free to adapt the theme to your needs and extend it with additional features.
+
+## Security Features
+
+This theme ships with a few basic security improvements:
+
+- A filter that changes the login URL slug (default `/login/`).
+- Simple rate limiting for failed login attempts.
+- Automatic security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`).
+
+You can adjust the login slug, the allowed attempts and the lockout duration under **Appearance → DadeCore Options → Login Security**. The login attempt limiter is disabled when a security plugin such as Wordfence is detected so there are no hook conflicts.
