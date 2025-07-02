@@ -31,13 +31,46 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: var(--wp--preset--color--gris-oscuro, #333);
+  background-color: var(--wp--preset--color--light, #fff);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
 }
 
 .container {
   width: 90%;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 85%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 80%;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: var(--wp--preset--radius--medium, 0.5rem);
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--light);
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--wp--preset--color--secondary);
 }
