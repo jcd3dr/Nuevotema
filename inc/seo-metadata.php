@@ -46,25 +46,24 @@ if ( dadecore_should_output_seo() ) {
  * Render SEO meta tags and structured data.
  */
 function dadecore_output_seo_metadata() {
-    $options = get_option( 'dadecore_seo_options', array() );
+    $options = get_option( 'dadecore_options', array() );
 
-    $title_enabled = ! isset( $options['disable_title'] ) || ! $options['disable_title'];
-    $title_enabled = apply_filters( 'dadecore_enable_seo_title', $title_enabled );
+    $title_enabled  = ! empty( $options['seo_meta_enabled'] );
+    $desc_enabled   = ! empty( $options['seo_meta_enabled'] );
+    $og_enabled     = ! empty( $options['seo_open_graph'] );
+    $jsonld_enabled = ! empty( $options['seo_json_ld'] );
 
-    $desc_enabled = ! isset( $options['disable_description'] ) || ! $options['disable_description'];
-    $desc_enabled = apply_filters( 'dadecore_enable_seo_description', $desc_enabled );
-
-    $og_enabled = ! isset( $options['disable_open_graph'] ) || ! $options['disable_open_graph'];
-    $og_enabled = apply_filters( 'dadecore_enable_open_graph', $og_enabled );
-
-    $jsonld_enabled = ! isset( $options['disable_json_ld'] ) || ! $options['disable_json_ld'];
+    $title_enabled  = apply_filters( 'dadecore_enable_seo_title', $title_enabled );
+    $desc_enabled   = apply_filters( 'dadecore_enable_seo_description', $desc_enabled );
+    $og_enabled     = apply_filters( 'dadecore_enable_open_graph', $og_enabled );
     $jsonld_enabled = apply_filters( 'dadecore_enable_json_ld', $jsonld_enabled );
 
     global $post;
 
     /* -------------------------- <title> & description ----------------------- */
     if ( $title_enabled ) {
-        $title = is_front_page() ? get_bloginfo( 'name' ) : wp_get_document_title();
+        $default_title = isset( $options['seo_default_title'] ) ? $options['seo_default_title'] : '';
+        $title = is_front_page() ? ( $default_title ? $default_title : get_bloginfo( 'name' ) ) : wp_get_document_title();
         echo '<title>' . esc_html( $title ) . "</title>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
@@ -77,7 +76,8 @@ function dadecore_output_seo_metadata() {
                 $description = wp_trim_words( wp_strip_all_tags( get_the_content() ), 55 );
             }
         } else {
-            $description = get_bloginfo( 'description' );
+            $default_desc = isset( $options['seo_default_description'] ) ? $options['seo_default_description'] : '';
+            $description  = $default_desc ? $default_desc : get_bloginfo( 'description' );
         }
 
         echo '<meta name="description" content="' . esc_attr( $description ) . "">\n";
@@ -85,15 +85,20 @@ function dadecore_output_seo_metadata() {
 
     /* --------------------------- Open Graph tags --------------------------- */
     if ( $og_enabled ) {
-        $og_title       = is_singular() ? get_the_title() : get_bloginfo( 'name' );
-        $og_description = is_singular() ? ( has_excerpt( $post ) ? get_the_excerpt() : wp_trim_words( wp_strip_all_tags( $post->post_content ), 55 ) ) : get_bloginfo( 'description' );
+        $default_title = isset( $options['seo_default_title'] ) ? $options['seo_default_title'] : '';
+        $default_desc  = isset( $options['seo_default_description'] ) ? $options['seo_default_description'] : '';
+        $og_title       = is_singular() ? get_the_title() : ( $default_title ? $default_title : get_bloginfo( 'name' ) );
+        $og_description = is_singular() ? ( has_excerpt( $post ) ? get_the_excerpt() : wp_trim_words( wp_strip_all_tags( $post->post_content ), 55 ) ) : ( $default_desc ? $default_desc : get_bloginfo( 'description' ) );
         $og_url         = is_singular() ? get_permalink() : home_url();
         $og_image       = '';
 
         if ( is_singular() && has_post_thumbnail() ) {
             $og_image = get_the_post_thumbnail_url( null, 'full' );
         } else {
-            $logo_id = get_theme_mod( 'custom_logo' );
+            $logo_id = isset( $options['seo_org_logo'] ) ? absint( $options['seo_org_logo'] ) : 0;
+            if ( ! $logo_id ) {
+                $logo_id = get_theme_mod( 'custom_logo' );
+            }
             if ( $logo_id ) {
                 $logo = wp_get_attachment_image_src( $logo_id, 'full' );
                 if ( $logo ) {
@@ -115,16 +120,30 @@ function dadecore_output_seo_metadata() {
     if ( $jsonld_enabled ) {
         // Organization schema.
         $org = array(
-            '@context' => 'https://schema.org',
-            '@type'    => 'Organization',
-            'url'      => home_url(),
-            'name'     => get_bloginfo( 'name' ),
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Organization',
+            'url'         => home_url(),
+            'name'        => isset( $options['seo_org_name'] ) && $options['seo_org_name'] ? $options['seo_org_name'] : get_bloginfo( 'name' ),
+            'description' => isset( $options['seo_org_description'] ) ? $options['seo_org_description'] : '',
         );
-        $logo_id = get_theme_mod( 'custom_logo' );
+
+        $logo_id = isset( $options['seo_org_logo'] ) ? absint( $options['seo_org_logo'] ) : 0;
+        if ( ! $logo_id ) {
+            $logo_id = get_theme_mod( 'custom_logo' );
+        }
         if ( $logo_id ) {
             $logo = wp_get_attachment_image_src( $logo_id, 'full' );
             if ( $logo ) {
                 $org['logo'] = $logo[0];
+            }
+        }
+        if ( ! empty( $options['seo_org_contact'] ) ) {
+            $org['contactPoint'] = array( array( '@type' => 'ContactPoint', 'contactType' => 'customer support', 'telephone' => $options['seo_org_contact'] ) );
+        }
+        if ( ! empty( $options['seo_org_social'] ) ) {
+            $urls = array_filter( array_map( 'trim', explode( "\n", $options['seo_org_social'] ) ) );
+            if ( $urls ) {
+                $org['sameAs'] = array_map( 'esc_url', $urls );
             }
         }
         echo "<script type=\"application/ld+json\">\n" . wp_json_encode( $org ) . "\n</script>\n";
@@ -164,10 +183,10 @@ function dadecore_output_seo_metadata() {
         $service = array(
             '@context'    => 'https://schema.org',
             '@type'       => 'Service',
-            'serviceType' => get_bloginfo( 'name' ),
+            'serviceType' => isset( $options['seo_org_name'] ) && $options['seo_org_name'] ? $options['seo_org_name'] : get_bloginfo( 'name' ),
             'provider'    => array(
                 '@type' => 'Organization',
-                'name'  => get_bloginfo( 'name' ),
+                'name'  => isset( $options['seo_org_name'] ) && $options['seo_org_name'] ? $options['seo_org_name'] : get_bloginfo( 'name' ),
                 'url'   => home_url(),
             ),
         );
