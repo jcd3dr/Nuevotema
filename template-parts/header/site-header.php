@@ -1,4 +1,8 @@
-<header id="masthead" class="site-header">
+<?php
+// Allow users to change the header color from the Customizer
+$header_bg = get_theme_mod( 'header_background_color', '#ffffff' );
+?>
+<header id="masthead" class="site-header" style="background-color: <?php echo esc_attr( $header_bg ); ?>;">
     <div class="site-branding">
         <?php the_custom_logo(); ?>
         <div class="site-title-description">
