@@ -9,6 +9,7 @@ require_once get_template_directory() . '/inc/enqueue.php';
 require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/theme-options.php';
 require_once get_template_directory() . '/inc/security.php';
+require_once get_template_directory() . '/inc/seo-metadata.php';
 
 // Elementor locations
 // La siguiente función y acción registran las ubicaciones del tema central de WordPress (header, footer, archive, single)
