@@ -1,5 +1,5 @@
 <?php
-if ( ! elementor_theme_do_location( 'single' ) ) {
+if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'single' ) ) {
     get_header();
     while ( have_posts() ) {
         the_post();
