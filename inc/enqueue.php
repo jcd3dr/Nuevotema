@@ -31,8 +31,8 @@ function dadecore_scripts() {
     wp_enqueue_script(
         'dadecore-script',
         get_template_directory_uri() . '/assets/js/main.js',
-        array( 'jquery' ),
-        '1.0',
+        array(),
+        filemtime( get_template_directory() . '/assets/js/main.js' ),
         true
     );
 

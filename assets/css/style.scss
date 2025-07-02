@@ -77,3 +77,33 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 0.5rem;
   }
 }
+
+// Hover Animation Utility
+.hover-animate {
+  transition: transform 0.2s ease-in-out;
+
+  &.is-hovered {
+    transform: translateY(-3px);
+  }
+}
+
+// Mobile Menu Toggle
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  #site-navigation {
+    display: none;
+    &.is-open {
+      display: block;
+    }
+  }
+}

@@ -10,6 +10,7 @@ $header_bg = get_theme_mod( 'header_background_color', '#ffffff' );
             <p class="site-description"><?php bloginfo( 'description' ); ?></p>
         </div>
     </div>
+    <button id="menu-toggle" class="menu-toggle" aria-controls="site-navigation" aria-expanded="false">&#9776;</button>
     <nav id="site-navigation" class="main-navigation">
         <?php wp_nav_menu( array( 'theme_location' => 'menu-1' ) ); ?>
     </nav>

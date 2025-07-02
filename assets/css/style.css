@@ -89,3 +89,32 @@ h1, h2, h3, h4, h5, h6 {
 #cookie-banner button {
   margin-left: 0.5rem;
 }
+
+.hover-animate {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-animate.is-hovered {
+  transform: translateY(-3px);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  #site-navigation {
+    display: none;
+  }
+
+  #site-navigation.is-open {
+    display: block;
+  }
+}
