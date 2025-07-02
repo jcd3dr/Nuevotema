@@ -1,0 +1,106 @@
+{
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        { "slug": "primary", "color": "#0057B8", "name": "Primary" },
+        { "slug": "secondary", "color": "#FF6F00", "name": "Secondary" },
+        { "slug": "light", "color": "#ffffff", "name": "Light" },
+        { "slug": "dark", "color": "#000000", "name": "Dark" },
+        { "slug": "azul-oscuro", "color": "#0D253F", "name": "Azul Oscuro" },
+        { "slug": "verde-tech", "color": "#00F5A0", "name": "Verde Tech" },
+        { "slug": "gris-claro", "color": "#F0F0F0", "name": "Gris Claro" },
+        { "slug": "gris-medio", "color": "#CCCCCC", "name": "Gris Medio" },
+        { "slug": "gris-oscuro", "color": "#333333", "name": "Gris Oscuro" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+          "slug": "system",
+          "name": "System Default"
+        },
+        {
+          "fontFamily": "Inter, sans-serif",
+          "slug": "inter",
+          "name": "Inter"
+        },
+        {
+          "fontFamily": "Poppins, sans-serif",
+          "slug": "poppins",
+          "name": "Poppins"
+        }
+      ],
+      "fontSizes": [
+        { "slug": "extra-small", "size": "0.75rem", "name": "Extra Small" },
+        { "slug": "small", "size": "0.875rem", "name": "Small" },
+        { "slug": "regular", "size": "1rem", "name": "Regular" },
+        { "slug": "medium", "size": "1.125rem", "name": "Medium" },
+        { "slug": "large", "size": "1.5rem", "name": "Large" },
+        { "slug": "extra-large", "size": "2rem", "name": "Extra Large" }
+      ]
+    },
+    "spacing": {
+      "units": ["px", "rem", "%", "vw", "vh"],
+      "spacingSizes": [
+        { "slug": "xx-small", "size": "0.25rem", "name": "XX-Small" },
+        { "slug": "x-small", "size": "0.5rem", "name": "X-Small" },
+        { "slug": "small", "size": "0.75rem", "name": "Small" },
+        { "slug": "medium", "size": "1rem", "name": "Medium" },
+        { "slug": "large", "size": "1.5rem", "name": "Large" },
+        { "slug": "x-large", "size": "2rem", "name": "X-Large" },
+        { "slug": "xx-large", "size": "3rem", "name": "XX-Large" }
+      ],
+      "padding": true,
+      "margin": true
+    },
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "customRadius": true,
+      "radii": [
+        { "slug": "small", "radius": "0.25rem", "name": "Small" },
+        { "slug": "medium", "radius": "0.5rem", "name": "Medium" },
+        { "slug": "large", "radius": "1rem", "name": "Large" },
+        { "slug": "full", "radius": "9999px", "name": "Full (Pill)" }
+      ]
+    },
+    "layout": {
+      "contentSize": "800px",
+      "wideSize": "1200px"
+    },
+    "custom": {
+      "settings": {
+        "animations": {
+          "timingFunction": "cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        "breakpoints": {
+          "sm": "576px",
+          "md": "768px",
+          "lg": "992px",
+          "xl": "1200px"
+        }
+      }
+    }
+  },
+  "styles": {
+    "spacing": {
+      "blockGap": "1.5rem"
+    },
+    "elements": {
+      "link": {
+        "color": {
+          "text": "var(--wp--preset--color--primary)"
+        },
+        ":hover": {
+          "color": {
+            "text": "var(--wp--preset--color--secondary)"
+          }
+        }
+      }
+    }
+  }
+}
