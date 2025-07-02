@@ -1,0 +1,43 @@
+.woocommerce-products-header__title.page-title {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.woocommerce ul.products li.product a img {
+  margin-bottom: 1em;
+}
+
+.woocommerce ul.products li.product .price {
+  color: #0073aa;
+  font-weight: bold;
+}
+
+.woocommerce div.product div.summary {
+  float: right;
+  width: 48%;
+}
+
+.woocommerce div.product div.images {
+  float: left;
+  width: 48%;
+}
+
+.woocommerce-cart-form {
+  margin-bottom: 2em;
+}
+
+.woocommerce-checkout #customer_details {
+  margin-bottom: 2em;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
