@@ -37,3 +37,13 @@ This theme ships with a few basic security improvements:
 - Automatic security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`).
 
 You can adjust the login slug, the allowed attempts and the lockout duration under **Appearance → DadeCore Options → Login Security**. The login attempt limiter is disabled when a security plugin such as Wordfence is detected so there are no hook conflicts.
+
+## SEO & Metadata Settings
+
+The theme includes a built‑in SEO panel found under **Appearance → DadeCore Options → SEO & Metadata Settings**. Use the checkboxes to toggle:
+
+- Meta tags for the `<title>` element and page description.
+- Open Graph tags for improved social sharing.
+- JSON‑LD structured data.
+
+These features are disabled automatically whenever a major SEO plugin (such as Yoast SEO or RankMath) is detected, preventing duplicate metadata output.
