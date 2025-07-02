@@ -24,9 +24,10 @@ function dadecore_register_theme_options() {
                 'login_slug'          => 'login',
                 'login_attempts'      => 3,
                 'lockout_minutes'     => 15,
-                'seo_meta_enabled'    => 1,
-                'seo_open_graph'      => 1,
-                'seo_json_ld'         => 1,
+                // SEO options: 1 to enable, 0 to disable each metadata block.
+                'seo_meta_enabled'    => 1, // Controls <title> and description tags.
+                'seo_open_graph'      => 1, // Controls Open Graph output.
+                'seo_json_ld'         => 1, // Controls JSON-LD schema output.
                 'seo_default_title'   => '',
                 'seo_default_description' => '',
                 'seo_org_logo'        => 0,
@@ -203,6 +204,7 @@ function dadecore_sanitize_options( $input ) {
     $output['login_slug']          = isset( $input['login_slug'] ) ? sanitize_title( $input['login_slug'] ) : 'login';
     $output['login_attempts']      = isset( $input['login_attempts'] ) ? absint( $input['login_attempts'] ) : 3;
     $output['lockout_minutes']     = isset( $input['lockout_minutes'] ) ? absint( $input['lockout_minutes'] ) : 15;
+    // Cast SEO option values to boolean for consistency.
     $output['seo_meta_enabled']    = isset( $input['seo_meta_enabled'] ) ? (bool) $input['seo_meta_enabled'] : false;
     $output['seo_open_graph']      = isset( $input['seo_open_graph'] ) ? (bool) $input['seo_open_graph'] : false;
     $output['seo_json_ld']         = isset( $input['seo_json_ld'] ) ? (bool) $input['seo_json_ld'] : false;
