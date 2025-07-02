@@ -21,6 +21,7 @@ function dadecore_register_theme_options() {
                 'adsense_code'        => '',
                 'amazon_block'        => '',
                 'gtm_container'       => '',
+                'disable_gcm'        => 0,
                 'login_slug'          => 'login',
                 'login_attempts'      => 3,
                 'lockout_minutes'     => 15,
@@ -66,6 +67,14 @@ function dadecore_register_theme_options() {
         'dadecore_gtm_container',
         __( 'Google Tag Manager Container ID', 'dadecore' ),
         'dadecore_gtm_field',
+        'dadecore_options',
+        'dadecore_ads_section'
+    );
+
+    add_settings_field(
+        'dadecore_disable_gcm',
+        __( 'Disable Google Consent Mode', 'dadecore' ),
+        'dadecore_disable_gcm_field',
         'dadecore_options',
         'dadecore_ads_section'
     );
@@ -201,6 +210,7 @@ function dadecore_sanitize_options( $input ) {
     $output['adsense_code']  = isset( $input['adsense_code'] ) ? wp_kses_post( $input['adsense_code'] ) : '';
     $output['amazon_block']  = isset( $input['amazon_block'] ) ? wp_kses_post( $input['amazon_block'] ) : '';
     $output['gtm_container'] = isset( $input['gtm_container'] ) ? sanitize_text_field( $input['gtm_container'] ) : '';
+    $output['disable_gcm']   = isset( $input['disable_gcm'] ) ? (bool) $input['disable_gcm'] : false;
     $output['login_slug']          = isset( $input['login_slug'] ) ? sanitize_title( $input['login_slug'] ) : 'login';
     $output['login_attempts']      = isset( $input['login_attempts'] ) ? absint( $input['login_attempts'] ) : 3;
     $output['lockout_minutes']     = isset( $input['lockout_minutes'] ) ? absint( $input['lockout_minutes'] ) : 15;
@@ -257,6 +267,19 @@ function dadecore_gtm_field() {
     printf(
         '<input type="text" name="dadecore_options[gtm_container]" value="%s" class="regular-text" />',
         esc_attr( $gtm_container )
+    );
+}
+
+/**
+ * Checkbox to disable Google Consent Mode.
+ */
+function dadecore_disable_gcm_field() {
+    $options = get_option( 'dadecore_options', array() );
+    $disabled = ! empty( $options['disable_gcm'] );
+
+    printf(
+        '<input type="checkbox" name="dadecore_options[disable_gcm]" value="1" %s />',
+        checked( $disabled, true, false )
     );
 }
 

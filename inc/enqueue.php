@@ -35,6 +35,14 @@ function dadecore_scripts() {
         '1.0',
         true
     );
+
+    wp_enqueue_script(
+        'dadecore-cookie-banner',
+        get_template_directory_uri() . '/assets/js/cookie-banner.js',
+        array(),
+        '1.0',
+        true
+    );
 }
 add_action( 'wp_enqueue_scripts', 'dadecore_scripts' );
 ?>
